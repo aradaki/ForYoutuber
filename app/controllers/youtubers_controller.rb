@@ -22,15 +22,14 @@ class YoutubersController < ApplicationController
   # POST /youtubers or /youtubers.json
   def create
     @youtuber = Youtuber.new(youtuber_params)
-
-    respond_to do |format|
-      if @youtuber.save
-        format.html { redirect_to @youtuber, notice: "Youtuber was successfully created." }
-        format.json { render :show, status: :created, location: @youtuber }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @youtuber.errors, status: :unprocessable_entity }
-      end
+    @youtuber.user_id=current_user.id
+    # 受け取った値を,で区切って配列にする
+    tag_list=params[:post][:name].split(',')
+    if @youtuber.save
+      @youtuber.save_tag(tag_list)
+      redirect_to youtubers_path(@youtuber),notice:'投稿完了しました:)'
+    else
+      render:new
     end
   end
 

@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_09_024218) do
+ActiveRecord::Schema.define(version: 2021_12_11_115404) do
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,6 +29,24 @@ ActiveRecord::Schema.define(version: 2021_12_09_024218) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "youtuber_tags", force: :cascade do |t|
+    t.integer "youtuber_id"
+    t.integer "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_youtuber_tags_on_tag_id"
+    t.index ["youtuber_id", "tag_id"], name: "index_youtuber_tags_on_youtuber_id_and_tag_id", unique: true
+    t.index ["youtuber_id"], name: "index_youtuber_tags_on_youtuber_id"
+  end
+
+  create_table "youtubers", force: :cascade do |t|
+    t.string "name"
+    t.string "image_id"
+    t.text "introduction"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
