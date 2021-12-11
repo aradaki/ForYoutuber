@@ -1,31 +1,8 @@
-<p id="notice"><%= notice %></p>
+<!--タグリスト-->
+<% @tag_list.each do |list|%>
+<%=list.name %>
+<%="(#{list.posts.count})" %><% end %>
 
-<h1>Youtubers</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Image</th>
-      <th>Introduction</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @youtubers.each do |youtuber| %>
-      <tr>
-        <td><%= youtuber.name %></td>
-        <td><%= youtuber.image_id %></td>
-        <td><%= youtuber.introduction %></td>
-        <td><%= link_to 'Show', youtuber %></td>
-        <td><%= link_to 'Edit', edit_youtuber_path(youtuber) %></td>
-        <td><%= link_to 'Destroy', youtuber, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Youtuber', new_youtuber_path %>
+投稿一覧画面で投稿に紐づくタグを表示
+<% @youtubers.each do |youtuber| %>
+<i class="fas fa-tag"><%= youtuber.tags.map(&:name).join(', ') %></i>

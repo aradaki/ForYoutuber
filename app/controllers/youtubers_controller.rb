@@ -8,6 +8,9 @@ class YoutubersController < ApplicationController
 
   # GET /youtubers/1 or /youtubers/1.json
   def show
+    @youtuber = Youtuber.find(params[:id])
+    @youtuber_comment=YoutuberComment.new
+    @youtuber_tags = @youtuber.tags
   end
 
   # GET /youtubers/new
