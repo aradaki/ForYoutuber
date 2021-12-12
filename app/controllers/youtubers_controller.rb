@@ -9,7 +9,6 @@ class YoutubersController < ApplicationController
   # GET /youtubers/1 or /youtubers/1.json
   def show
     @youtuber = Youtuber.find(params[:id])
-    @youtuber_comment=YoutuberComment.new
     @youtuber_tags = @youtuber.tags
   end
 
@@ -27,7 +26,7 @@ class YoutubersController < ApplicationController
     @youtuber = Youtuber.new(youtuber_params)
     @youtuber.user_id=current_user.id
     # 受け取った値を,で区切って配列にする
-    tag_list=params[:post][:name].split(',')
+    tag_list=params[:youtuber][:name].split(',')
     if @youtuber.save
       @youtuber.save_tag(tag_list)
       redirect_to youtubers_path(@youtuber),notice:'投稿完了しました:)'
