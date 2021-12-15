@@ -56,6 +56,15 @@ class YoutubersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def search
+    # キーワード検索
+    @search = Product.ransack(params[:q])
+    @results = @search.result.order("created_at DESC").page(params[:page]).per(10)
+
+    # タグ検索
+    @tag_search = Product.tagged_with(params[:search])
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
