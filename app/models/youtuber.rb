@@ -1,7 +1,7 @@
 class Youtuber < ApplicationRecord
   has_many :youtuber_tags,dependent: :destroy
   has_many :tags,through: :youtuber_tags
-  
+  has_many :comments, dependent: :destroy  #Post.commentsで、投稿が所有するコメントw取得できる。
   def save_tag(sent_tags)
   # タグが存在していれば、タグの名前を配列として全て取得
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
