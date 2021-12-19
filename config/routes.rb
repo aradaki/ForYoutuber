@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'youtubers#index'
   devise_for :users, :controllers => {
   :registrations => 'users/registrations',
   :sessions => 'users/sessions'   
@@ -9,9 +10,9 @@ devise_scope :user do
   get "login", :to => "users/sessions#new"
   get "logout", :to => "users/sessions#destroy"
 end
-  get 'tags/index'
-  get "/about" => "about"
-  
+ get 'tags/index'
+# get "/about" => "about"
+
   resources :youtubers do
     resources :comments, only: [:create]
   end
