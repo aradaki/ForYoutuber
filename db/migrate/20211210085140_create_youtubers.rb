@@ -1,9 +1,9 @@
 class CreateYoutubers < ActiveRecord::Migration[5.2]
   def change
     create_table :youtubers do |t|
-      t.string :name
+      t.string :name, null: false
       t.string :image_id
-      t.text :introduction
+      t.text :introduction, null: false
 
       t.timestamps
     end

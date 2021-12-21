@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container">
+    <%= link_to "ForYoutubers", root_path, class:"navbar-brand border border-secondary" %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <ul class="navbar-nav ml-md-auto align-items-center" >
+        <% if user_signed_in? %>
+          <li>ようこそ、<%= current_user.name %>さん！</li>
+          <li><%= link_to "マイページ", mypage_path, class:"btn btn-light btn-outline-secondary btn-margin" %></li>
+          <li><%= link_to "Yotuber一覧", youtubers_path, class:"btn btn-light btn-outline-secondary btn-margin" %></li>
+          <li><%= link_to "タグ一覧", tags_index_path, class:"btn btn-light btn-outline-secondary btn-margin" %></li>
+          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-light btn-outline-secondary btn-margin" %></li>
+        <% else %>
+          <li><%= link_to "About", about_path, class:"btn btn-light btn-outline-secondary btn-margin" %></li>
+          <li><%= link_to "Youtuber一覧", youtubers_path, class:"btn btn-light btn-outline-secondary btn-margin" %></li>
+          <li><%= link_to "新規登録", new_user_registration_path, class:"btn btn-light btn-outline-secondary btn-margin" %></li>
+          <li><%= link_to "ログイン", new_user_session_path,class:"btn btn-light btn-outline-secondary btn-margin" %></li>
+        <% end %>
+          <li><input name="search" placeholder="search　🔍"></li>
+      </ul>
+    </div>
+  </div>
+</nav>
