@@ -1,4 +1,4 @@
-class YoutubertTag < ApplicationRecord
+class YoutuberTag < ApplicationRecord
   belongs_to :youtuber
   belongs_to :tag
   validates :youtuber_id, presence: true

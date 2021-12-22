@@ -1,7 +1,7 @@
 <h2>タイトル</h2>
-<p><%= @youtuber.title %></p>
+<p><%= @youtuber.name %></p>
 <h2>本文</h2>
-<p><%= @youtuber.body %></p>
+<p><%= @youtuber.introduction %></p>
 
 <% @youtuber_tags.each do |tag| %>
   <%=tag.name%><%="(#{tag.youtubers.count})" %>\

@@ -10,7 +10,7 @@
           <li>ようこそ、<%= current_user.name %>さん！</li>
           <li><%= link_to "マイページ", mypage_path, class:"btn btn-light btn-outline-secondary btn-margin" %></li>
           <li><%= link_to "Yotuber一覧", youtubers_path, class:"btn btn-light btn-outline-secondary btn-margin" %></li>
-          <li><%= link_to "タグ一覧", tags_index_path, class:"btn btn-light btn-outline-secondary btn-margin" %></li>
+          <li><%= link_to "タグ一覧", tags_path, class:"btn btn-light btn-outline-secondary btn-margin" %></li>
           <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-light btn-outline-secondary btn-margin" %></li>
         <% else %>
           <li><%= link_to "About", about_path, class:"btn btn-light btn-outline-secondary btn-margin" %></li>

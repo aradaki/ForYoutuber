@@ -1,15 +1,38 @@
-<h2>投稿する</h2>
 
-<% form_with model: @youtuber do |f| %>
-  <p><%= form.label :title %><br>
-  <%= form.text_field :title %> #titleの入力フォーム生成
-  </p>
 
-  <p><%= form.label :body %><br>
-  <%= form.text_area :body %> #bodyの入力フォーム生成
-  </p>
-
-  <p><%= form.submit %> #送信ボタンを生成
-  </p>
-
+<div class="container">
+  <div class="row">
+    <h2>Youtuber新規登録</h2>
+  </div>
+  <%= form_with model: @youtuber, url: youtubers_path, local:true do |f| %>
+  <div class="row">
+    <div class="col-lg-7, mx-auto">
+      <table>
+        <tr>
+          <th>Youtuber画像</th>
+          <th><%= f.attachment_field :image, placeholder:"Youtuber画像" %></th>
+        </tr>
+        <tr>
+          <th>Youtuber名</th>
+          <th><%= f.text_field :name %></th>
+        </tr>
+        <tr>
+          <th>Youtuber説明</th>
+          <th><%= f.text_area :introduction %></th>
+        </tr>
+        <tr>
+          <th>タグ</th>
+          <th>
+            <%= f.collection_select :tag_id, Tag.all, :id, :name, include_blank: "選択して下さい" %>
+          </th>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-2, mx-auto">
+       <%= f.submit "新規登録", class: "btn btn-success" %>
+    </div>
+  </div>
   <% end %>
+</div>

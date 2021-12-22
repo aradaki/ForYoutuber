@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 2021_12_16_032926) do
     t.string "comment_content"
     t.integer "user_id"
     t.integer "youtuber_id"
+    t.float "rate", default: 0.0, null: false
+    t.text "comment", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_comments_on_user_id"
@@ -52,9 +54,10 @@ ActiveRecord::Schema.define(version: 2021_12_16_032926) do
   end
 
   create_table "youtubers", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "image_id"
-    t.text "introduction"
+    t.text "introduction", null: false
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

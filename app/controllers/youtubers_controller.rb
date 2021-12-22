@@ -4,6 +4,7 @@ class YoutubersController < ApplicationController
   # GET /youtubers or /youtubers.json
   def index
     @youtubers = Youtuber.all
+    @page = Youtuber.all.page(params[:page]).per(10)
   end
 
   # GET /youtubers/1 or /youtubers/1.json
@@ -31,7 +32,7 @@ class YoutubersController < ApplicationController
     tag_list=params[:youtuber][:name].split(',')
     if @youtuber.save
       @youtuber.save_tag(tag_list)
-      redirect_to youtubers_path(@youtuber),notice:'投稿完了しました:)'
+      redirect_to youtubers_path, notice:'投稿完了しました:)'
     else
       render:new
     end
@@ -58,7 +59,7 @@ class YoutubersController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def search
     # キーワード検索
     @search = Product.ransack(params[:q])

@@ -1,5 +1,9 @@
 <h1>投稿一覧</h1>
 <% @youtubers.each do |youtuber| %>
-  <span><%= link_to youtuber.content, "/youtuber/#{youtuber.id}" %></span>
+  <span><%= link_to youtuber.introduction, "/youtubers/#{youtuber.id}" %></span>
 <% end %>
 
+<div class="col">
+  <%= link_to "＋", new_youtuber_path, class: "btn btn-success rounded-circle p-2" %>
+</div>
+<%= paginate @page %>

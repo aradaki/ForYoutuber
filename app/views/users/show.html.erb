@@ -1,1 +1,22 @@
-<%=@user.name%>
+
+<h2>User info</h2>
+
+<%= attachment_image_tag user, :profile_image, size: '50x50', format: 'jpeg', fallback: "no_image.jpg" %>
+
+<table class="table">
+  <tbody>
+    <tr></tr>
+    <tr>
+      <td>name</td>
+      <td><%= @user.name %></td>
+    </tr>
+
+    <tr>
+      <td>introduction</td>
+      <td><%= @user.introduction %></td>
+    </tr>
+
+    <tr><% if user.id == current_user.id %></tr>
+    <% end %>
+  </tbody>
+</table>

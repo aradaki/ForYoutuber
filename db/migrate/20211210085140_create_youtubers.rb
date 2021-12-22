@@ -4,6 +4,7 @@ class CreateYoutubers < ActiveRecord::Migration[5.2]
       t.string :name, null: false
       t.string :image_id
       t.text :introduction, null: false
+      t.integer :user_id
 
       t.timestamps
     end

@@ -8,8 +8,10 @@ devise_scope :user do
   get "logout", :to => "users/sessions#destroy"
   get "/mypage" => "users#mypage"
   get "/users/edit" => "users#edit"
+  patch "/users" => "users#update"
 end
-  get 'tags/index'
+ #get 'tags/index'
+  resources :tags, only: [:index, :create]
   get "/about" => "homes#about"
   resources :users
   resources :youtubers do
