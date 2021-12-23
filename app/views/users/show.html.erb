@@ -1,7 +1,7 @@
 
 <h2>User info</h2>
 
-<%= attachment_image_tag user, :profile_image, size: '50x50', format: 'jpeg', fallback: "no_image.jpg" %>
+<%= attachment_image_tag @user, :profile_image_id, size: '100x100', format: 'jpeg', fallback: "no_image.jpg" %>
 
 <table class="table">
   <tbody>
@@ -16,7 +16,10 @@
       <td><%= @user.introduction %></td>
     </tr>
 
-    <tr><% if user.id == current_user.id %></tr>
+    <tr><% if @user.id == current_user.id %></tr>
     <% end %>
+    <div class="row">
+      <%= link_to " ", edit_user_path(@user), class: "btn btn-outline-secondary btn-block fas fa-user-cog" %>
+    </div>
   </tbody>
 </table>

@@ -5,7 +5,6 @@ class CreateComments < ActiveRecord::Migration[5.2]
       t.references :user, foreign_key: true
       t.references :youtuber, foreign_key: true
       t.float :rate, null: false, default: 0
-      t.text :comment, null: false
 
       t.timestamps
     end

@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 2021_12_16_032926) do
     t.integer "user_id"
     t.integer "youtuber_id"
     t.float "rate", default: 0.0, null: false
-    t.text "comment", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_comments_on_user_id"
@@ -36,7 +35,10 @@ ActiveRecord::Schema.define(version: 2021_12_16_032926) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "name"
+    t.string "name", null: false
+    t.string "introduction"
+    t.string "profile_image_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

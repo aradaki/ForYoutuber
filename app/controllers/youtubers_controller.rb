@@ -62,11 +62,11 @@ class YoutubersController < ApplicationController
 
   def search
     # キーワード検索
-    @search = Product.ransack(params[:q])
+    @search = Youtuber.ransack(params[:q])
     @results = @search.result.order("created_at DESC").page(params[:page]).per(10)
-
+byebug
     # タグ検索
-    @tag_search = Product.tagged_with(params[:search])
+    @tag_search = Youtuber.tagged_with(params[:search])
   end
 
   private

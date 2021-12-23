@@ -6,20 +6,108 @@
 <% @youtuber_tags.each do |tag| %>
   <%=tag.name%><%="(#{tag.youtubers.count})" %>\
 <% end %>
-  
-下が本命
-h2 投稿詳細
 
-= @post.post_content
 
-h2 コメントをする
+<h2>投稿詳細</h2>
 
-= form_with(model:[@post, @comment], method: :post) do |f|
-  = f.text_area :comment_content
-  = f.hidden_field :post_id, value: @post.id
-  = f.submit 'コメントする'
+<%= attachment_image_tag @youtuber, :image_id, size: '100x100', format: 'jpeg', fallback: "no_image.jpg" %>
 
-h2 コメント一覧
+<%= @youtuber.introduction %>
 
-- @comments.each do |comment|
-  = comment.comment_content  #コメントの内容が表示される
+<h2>コメントをする</h2>
+<%= form_with(model:[@youtuber, @comment], method: :youtuber) do |f| %>
+<!--商品コードの送信-->
+  <%= f.hidden_field :youtuber_id, { value: @youtuber.id} %>
+
+<!-- 評価 -->
+  <div class="form-group row" id="star">
+    <%= f.label :rate,'評価 ', class:'col-md-3 col-form-label' %>
+    <%= f.hidden_field :rate, id: :review_star %>
+  </div>
+
+
+  <!-- 口コミ -->
+  <div class="form-group row">
+    <%= f.label :content, 'コメント ', class:'col-md-3 col-form-label' %>
+    <div class="col-md-9">
+      <%= f.text_area :comment_content, class: "form-control", rows: "8",
+        placeholder:'ここにコメントを入力してください' %>
+    </div>
+  </div>
+
+  <!-- 確認ボタン -->
+  <div class="form-group row justify-content-end">
+    <div class="col-md-9">
+      <%= f.submit '投稿する', class:"btn btn-success" %>
+    </div>
+  </div>
+
+<% end %>
+
+
+  <!-- 評価javascript -->
+  <script>
+  $('#star').raty({
+    size     : 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    scoreName: 'comment[rate]',
+    half: true,
+  });
+  </script>
+
+
+
+<% if @comments.present? %>
+  <% @comments.each do |comment| %>
+    <div class="row posts">
+      <div class="col-md-2 comments-user">
+        <p class="comments-title"><%#= link_to comment.user.name, comment.user %></p>
+        <p class="comments-prof"><%#= comment.user.gender %> <%#= comment.user.height %> <%#= comment.user.weight %></p>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class=" comments-content">
+          <p><%#= simple_time(comment.created_at) %></p>
+          <h4 class="mb-3">評価：<%= comment.rate %>点 | <%#= comment.title %></h4>
+
+          <!--星評価-->
+         <div id="star-rate-<%= comment.id %>"></div>
+          <script>
+          $('#star-rate-<%= comment.id %>').raty({
+            size: 36,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            half: true,
+            readOnly: true,
+            score: <%= comment.rate %>,
+          });
+          </script>
+        <!--/星評価-->
+
+          <p><%= comment.comment_content %></p>
+          <%#= image_tag comment.picture.url, class:'img-fluid' if comment.picture? %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <%#= link_to comment.product do %>
+          <div class="comments-product">
+            <img src="<%#= comment.product.image_url %>" alt="">
+            <p><%#=  comment.product.title %></p>
+          </div>
+        <%# end %>
+      </div>
+      <div class="col-md-12 edit-button">
+        <%# if current_user == comment.user %>
+          <%#= link_to '口コミを編集', edit_post_path(post), method: :get, class:'btn btn-default' %>
+          <%#= link_to '口コミを削除', post, method: :delete, class:'btn btn-default' %>
+        <%# end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+
+
+
