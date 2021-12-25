@@ -1,0 +1,17 @@
+<%= form_for @style do |f| %>
+  <div class="col-xs-12">
+・・・・・・・
+    <label class="col-sm-12">タグ</label>
+      <div class="col-sm-12">
+        <% @tags.each do |tag| %>
+          <%= f.check_box :tag_list, { multiple: true }, "#{tag.name}", nil %>
+          <%= f.label " #{tag.name}(#{tag.taggings_count})", class: "label label-default" %>
+        <% end %>
+      </div>
+
+      <div class="col-sm-12 text-right">
+        <%= f.submit "新規作成", class: "btn btn-danger" %>
+      </div>
+   </div>
+  </div>
+<% end %>

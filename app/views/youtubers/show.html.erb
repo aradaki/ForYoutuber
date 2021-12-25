@@ -17,8 +17,8 @@
   });
   </script>
 
-<% @youtuber_tags.each do |tag| %>
-  <%=tag.name%>(<%= tag.youtubers.count %>)&nbsp;&nbsp;
+<% @youtuber.tag_list.each do |tag| %>
+  <%= tag %>&nbsp;&nbsp;
 <% end %>
 
 

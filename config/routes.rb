@@ -12,6 +12,7 @@ devise_scope :user do
 end
  #get 'tags/index'
   resources :tags, only: [:index, :create]
+  resources :styles
   get "/about" => "homes#about"
   resources :users
   resources :youtubers do

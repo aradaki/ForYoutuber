@@ -1,10 +1,13 @@
-<h1>投稿一覧</h1>
-<% @youtubers.each do |youtuber| %>
-  <span><%= link_to youtuber.introduction, "/youtubers/#{youtuber.id}" %></span>
-  <p><%= attachment_image_tag youtuber, :image, size: "50x50" %></p>
-<% end %>
-
+<h1>Youtuber一覧</h1>
+<div class="container">
 <div class="col">
   <%= link_to "＋", new_youtuber_path, class: "btn btn-success rounded-circle p-2" %>
 </div>
+<% @youtubers.each do |youtuber| %>
+  <span><%= link_to youtuber.introduction, "/youtubers/#{youtuber.id}" %></span>
+  <p><%= attachment_image_tag @youtuber, :image_id, size: '100x100', format: 'jpeg', fallback: "no_image.jpg" %></p>
+  
+<% end %>
+</div>
+
 <%= paginate @page %>

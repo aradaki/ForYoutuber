@@ -1,25 +1,24 @@
 class Youtuber < ApplicationRecord
   has_many :youtuber_tags,dependent: :destroy
-  has_many :tags,through: :youtuber_tags
   has_many :comments, dependent: :destroy  #Post.commentsで、投稿が所有するコメントw取得できる。
   attachment :image
-  def save_tag(sent_tags)
-  # タグが存在していれば、タグの名前を配列として全て取得
-    current_tags = self.tags.pluck(:name) unless self.tags.nil?
-    # 現在取得したタグから送られてきたタグを除いてoldtagとする
-    old_tags = current_tags - sent_tags
-    # 送信されてきたタグから現在存在するタグを除いたタグをnewとする
-    new_tags = sent_tags - current_tags
+  acts_as_taggable_on :tags
 
-    # 古いタグを消す
-    old_tags.each do |old|
-      self.tags.delete　Tag.find_by(name: old)
-    end
+  # Tag Save & Remove
+  def tag_diff(tags)
+    # Tag Split
+    current_tags = tag_list.split(',')
+    save_tags = tags.split(',')
 
-    # 新しいタグを保存
-    new_tags.each do |new|
-      new_post_tag = Tag.find_or_create_by(name: new)
-      self.tags << new_post_tag
-   end
+    old_tags = (current_tags - save_tags).join(',') # Old Tags
+    new_tags = (save_tags - current_tags).join(',') # New Tags
+
+    # Remove '#'
+    old_tags.delete!('#')
+    new_tags.delete!('#')
+
+    # Tag Save & Remove
+    tag_list.remove(old_tags, parse: true)
+    tag_list.add(new_tags, parse: true)
   end
 end

@@ -22,9 +22,7 @@
         </tr>
         <tr>
           <th>タグ</th>
-          <th>
-            <%= f.collection_select :tag_id, Tag.all, :id, :name, include_blank: "選択して下さい" %>
-          </th>
+          <th><%= f.text_field :tag %></th>
         </tr>
       </table>
     </div>

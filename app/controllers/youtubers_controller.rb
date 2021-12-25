@@ -3,6 +3,7 @@ class YoutubersController < ApplicationController
 
   # GET /youtubers or /youtubers.json
   def index
+
     @youtubers = Youtuber.all
     @page = Youtuber.all.page(params[:page]).per(10)
   end
@@ -10,7 +11,7 @@ class YoutubersController < ApplicationController
   # GET /youtubers/1 or /youtubers/1.json
   def show
     @youtuber = Youtuber.find(params[:id])
-    @youtuber_tags = @youtuber.tags
+    #@youtuber_tags = @youtuber.tags
     @comments = @youtuber.comments  #投稿詳細に関連付けてあるコメントを全取得
     @comment = current_user.comments.new  #投稿詳細画面でコメントの投稿を行うので、formのパラメータ用にCommentオブジェクトを取得
   end
@@ -29,9 +30,10 @@ class YoutubersController < ApplicationController
     @youtuber = Youtuber.new(youtuber_params)
     @youtuber.user_id=current_user.id
     # 受け取った値を,で区切って配列にする
-    tag_list=params[:youtuber][:name].split(',')
+    # tag_list=params[:youtuber][:name].split(',')
+    @youtuber.tag_diff(params[:youtuber][:tag])
     if @youtuber.save
-      @youtuber.save_tag(tag_list)
+      # @youtuber.save_tag(tag_list)
       redirect_to youtubers_path, notice:'投稿完了しました:)'
     else
       render:new
@@ -64,7 +66,6 @@ class YoutubersController < ApplicationController
     # キーワード検索
     @search = Youtuber.ransack(params[:q])
     @results = @search.result.order("created_at DESC").page(params[:page]).per(10)
-byebug
     # タグ検索
     @tag_search = Youtuber.tagged_with(params[:search])
   end
