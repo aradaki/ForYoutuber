@@ -1,25 +1,30 @@
 
 <h2>User info</h2>
 
-<%= attachment_image_tag @user, :profile_image_id, size: '100x100', format: 'jpeg', fallback: "no_image.jpg" %>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <table class="table">
+        <tbody>
+          <tr><td>
+            <%= attachment_image_tag @user, :profile_image, size: '100x100', format: 'jpeg', fallback: "no_image.jpg" %>
+          </td></tr>
 
-<table class="table">
-  <tbody>
-    <tr></tr>
-    <tr>
-      <td>name</td>
-      <td><%= @user.name %></td>
-    </tr>
+          <tr>
+            <td>name</td>
+            <td><%= @user.name %></td>
+          </tr>
 
-    <tr>
-      <td>introduction</td>
-      <td><%= @user.introduction %></td>
-    </tr>
+          <tr>
+            <td>introduction</td>
+            <td><%= @user.introduction %></td>
+          </tr>
 
-    <tr><% if @user.id == current_user.id %></tr>
-    <% end %>
-    <div class="row">
-      <%= link_to " ", edit_user_path(@user), class: "btn btn-outline-secondary btn-block fas fa-user-cog" %>
+          <tr><% if @user.id == current_user.id %>
+            <td colspan="2"><%= link_to "編集", edit_user_path(@user), class: "btn btn-outline-secondary btn-block fas fa-user-cog" %></td>
+          <% end %></tr>
+        </tbody>
+      </table>
     </div>
-  </tbody>
-</table>
+  </div>
+</div>
