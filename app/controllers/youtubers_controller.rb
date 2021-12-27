@@ -3,9 +3,9 @@ class YoutubersController < ApplicationController
 
   # GET /youtubers or /youtubers.json
   def index
+    
+    @youtubers = Youtuber.all.page(params[:page]).per(10)
 
-    @youtubers = Youtuber.all
-    @page = Youtuber.all.page(params[:page]).per(10)
   end
 
   # GET /youtubers/1 or /youtubers/1.json
@@ -13,7 +13,9 @@ class YoutubersController < ApplicationController
     @youtuber = Youtuber.find(params[:id])
     #@youtuber_tags = @youtuber.tags
     @comments = @youtuber.comments  #投稿詳細に関連付けてあるコメントを全取得
-    @comment = current_user.comments.new  #投稿詳細画面でコメントの投稿を行うので、formのパラメータ用にCommentオブジェクトを取得
+    if user_signed_in?
+      @comment = current_user.comments.new  #投稿詳細画面でコメントの投稿を行うので、formのパラメータ用にCommentオブジェクトを取得
+    end
   end
 
   # GET /youtubers/new
@@ -78,6 +80,6 @@ class YoutubersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def youtuber_params
-      params.require(:youtuber).permit(:name, :image_id, :introduction)
+      params.require(:youtuber).permit(:name, :image, :introduction)
     end
 end

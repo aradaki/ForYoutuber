@@ -1,13 +1,28 @@
-<h1>Youtuber一覧</h1>
+<h1 class="title">Youtuber一覧</h1>
 <div class="container">
 <div class="col">
   <%= link_to "＋", new_youtuber_path, class: "btn btn-success rounded-circle p-2" %>
 </div>
 <% @youtubers.each do |youtuber| %>
   <span><%= link_to youtuber.introduction, "/youtubers/#{youtuber.id}" %></span>
-  <p><%= attachment_image_tag @youtuber, :image_id, size: '100x100', format: 'jpeg', fallback: "no_image.jpg" %></p>
-  
+  <p><%= attachment_image_tag youtuber, :image, size: '100x100', format: 'jpeg', fallback: "no_image.jpg" %></p>
+  <div id="star-rate-average-<%= youtuber.id %>"></div>
 <% end %>
 </div>
-
-<%= paginate @page %>
+<div class="page">
+  <%= paginate @youtubers %>
+</div>
+<script>
+      <% @youtubers.each do |youtuber| %>
+        $("#star-rate-average-<%= youtuber.id %>").raty({
+          size: 36,
+          starOff: "<%= asset_path('star-off.png') %>",
+          starOn: "<%= asset_path('star-on.png') %>",
+          starHalf: "<%= asset_path('star-half.png') %>",
+          half: true,
+          readOnly: true,
+          score: "<%= youtuber.comments.average(:rate).to_f.round(1) %>",
+        //注目ポイント↑ 平均点を算出し、round関数で切り上げ
+        });
+      <% end %>
+</script>

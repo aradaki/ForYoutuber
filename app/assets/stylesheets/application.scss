@@ -14,9 +14,14 @@
  *= require_self
  */
  @import "bootstrap";
+
  .row {
     display: flex;
     flex-wrap: wrap;
     margin-right: 0px;
     margin-left: 0px;
  }
+
+.title {
+  margin-bottom: 2.5rem;
+}

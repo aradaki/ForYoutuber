@@ -1,0 +1,13 @@
+// Place all the styles related to the Tags controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.tags a {
+    background-color: skyblue;
+    padding: 6px 8px;
+    border-radius: 6px;
+}

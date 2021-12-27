@@ -1,0 +1,38 @@
+
+<div class="container">
+  <h1 class="title">タグ一覧</h1>
+  <div class="rowr">
+    <div class="tags">
+      <% if @tags.present? %>
+         <% @tags.each do |tag| %>
+          <%= link_to "#{tag.name}(#{tag.taggings_count})",search_youtubers_path(search: tag.name), class: "label label-default" %>
+       <% end %>
+      <% end %>
+    </div>
+  </div>
+  <% if @tag.errors.present? %>
+    <% @tag.errors.full_messages.each do |full_message| %>
+    <%= full_message %>
+    <% end %>
+  <% end %>
+  <div class="row">
+
+  </div>
+  <%= form_with model: @tag, url: tags_path, local: true do |f| %>
+  <div class="row">
+    <div class="col-lg-7, mx-auto">
+      <table>
+        <tr>
+          <th>タグ名</th>
+          <th><%= f.text_field :name %></th>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-2, mx-auto">
+       <%= f.submit "新規タグ作成", class: "btn btn-success" %>
+    </div>
+  </div>
+  <% end %>
+</div>

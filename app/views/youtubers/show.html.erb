@@ -1,62 +1,65 @@
-<h2>タイトル</h2>
-<p><%= @youtuber.name %></p>
-<h2>本文</h2>
-<p><%= @youtuber.introduction %></p>
-<h2>評価</h2>
-<div id="star-rate-average-<%= @youtuber.id %>"></div>
-<script>
-  $("#star-rate-average-<%= @youtuber.id %>").raty({
-    size: 36,
-    starOff: "<%= asset_path('star-off.png') %>",
-    starOn: "<%= asset_path('star-on.png') %>",
-    starHalf: "<%= asset_path('star-half.png') %>",
-    half: true,
-    readOnly: true,
-    score: "<%= @youtuber.comments.average(:rate).to_f.round(1) %>",
-    //注目ポイント↑ 平均点を算出し、round関数で切り上げ
-  });
-  </script>
-
+<div class="container">
+  <div class="row">
+    <div class="col-6 col-offset-3">
+      <h2 class="title">Youtuber詳細</h2>
+    </div>
+  </div>
+  <div class="col-6 col-offset-4">
+    <h4>Youtuberの名前</h4>
+    <p><%= @youtuber.name %></p>
+    <h4>説明</h4>
+    <p><%= @youtuber.introduction %></p>
+    <h4>評価</h4>
+    <div id="star-rate-average-<%= @youtuber.id %>"></div>
+    <script>
+      $("#star-rate-average-<%= @youtuber.id %>").raty({
+        size: 36,
+        starOff: "<%= asset_path('star-off.png') %>",
+        starOn: "<%= asset_path('star-on.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        half: true,
+        readOnly: true,
+        score: "<%= @youtuber.comments.average(:rate).to_f.round(1) %>",
+        //注目ポイント↑ 平均点を算出し、round関数で切り上げ
+      });
+    </script>
+  </div>
 <% @youtuber.tag_list.each do |tag| %>
   <%= tag %>&nbsp;&nbsp;
 <% end %>
 
+<%= attachment_image_tag @youtuber, :image, size: '100x100', format: 'jpeg', fallback: "no_image.jpg" %>
 
-<h2>投稿詳細</h2>
-
-<%= attachment_image_tag @youtuber, :image_id, size: '100x100', format: 'jpeg', fallback: "no_image.jpg" %>
-
-<%= @youtuber.introduction %>
-
-<h2>コメントをする</h2>
-<%= form_with(model:[@youtuber, @comment], method: :youtuber) do |f| %>
+<% if user_signed_in? %>
+  <h4>コメントをする</h4>
+  <%= form_with(model:[@youtuber, @comment], method: :youtuber) do |f| %>
 <!--商品コードの送信-->
-  <%= f.hidden_field :youtuber_id, { value: @youtuber.id} %>
+    <%= f.hidden_field :youtuber_id, { value: @youtuber.id} %>
 
 <!-- 評価 -->
-  <div class="form-group row" id="star">
-    <%= f.label :rate,'評価 ', class:'col-md-3 col-form-label' %>
-    <%= f.hidden_field :rate, id: :review_star %>
-  </div>
+    <div class="form-group row" id="star">
+      <%= f.label :rate,'評価 ', class:'col-md-3 col-form-label' %>
+      <%= f.hidden_field :rate, id: :review_star %>
+    </div>
 
 
   <!-- 口コミ -->
-  <div class="form-group row">
-    <%= f.label :content, 'コメント ', class:'col-md-3 col-form-label' %>
-    <div class="col-md-9">
+    <div class="form-group row">
+      <%= f.label :content, 'コメント ', class:'col-md-3 col-form-label' %>
+      <div class="col-md-9">
       <%= f.text_area :comment_content, class: "form-control", rows: "8",
         placeholder:'ここにコメントを入力してください' %>
+      </div>
     </div>
-  </div>
 
   <!-- 確認ボタン -->
-  <div class="form-group row justify-content-end">
-    <div class="col-md-9">
-      <%= f.submit '投稿する', class:"btn btn-success" %>
+    <div class="form-group row justify-content-end">
+      <div class="col-md-9">
+        <%= f.submit '投稿する', class:"btn btn-success" %>
+      </div>
     </div>
-  </div>
 
-<% end %>
+  <% end %>
 
 
   <!-- 評価javascript -->
@@ -70,9 +73,9 @@
     half: true,
   });
   </script>
+<% end %>
 
-
-
+<h4>コメント一覧</h4>
 <% if @comments.present? %>
   <% @comments.each do |comment| %>
     <div class="row posts">
