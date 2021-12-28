@@ -1,2 +1,2 @@
 <li><%= link_to a_product.name, "/youtubers/#{a_product.id}" %>
-<p><%= attachment_image_tag @youtuber, :image_id, size: '100x100', format: 'jpeg', fallback: "no_image.jpg" %></p></li>
+<p><%= attachment_image_tag a_product, :image, size: '100x100', format: 'jpeg', fallback: "no_image.jpg" %></p></li>

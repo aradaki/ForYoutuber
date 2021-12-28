@@ -1,5 +1,6 @@
 class YoutubersController < ApplicationController
   before_action :set_youtuber, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: [:new]
 
   # GET /youtubers or /youtubers.json
   def index
@@ -20,6 +21,7 @@ class YoutubersController < ApplicationController
 
   # GET /youtubers/new
   def new
+    flash[:notice] = "ログイン済ユーザーのみ新規Youtuberを追加できます" unless user_signed_in?
     @youtuber = Youtuber.new
   end
 
