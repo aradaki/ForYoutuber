@@ -1,25 +1,25 @@
-# <for YOUtuber>
+For Youtuber
 
 ## サイト概要
-<様々なyoutuberを紹介、コメントできるサイト>
+様々なyoutuberを紹介、コメントできるサイト
 
 ### サイトテーマ
-<おすすめyoutuberを共有できる>
+おすすめyoutuberを共有できる
 
 ### テーマを選んだ理由
-<私はよくyoutubeを見るのですが見たい系統のyoutuberを検索してもいつも同じyoutuberが出てくるので、youtuberに系統に合わせてタグ付けをしてタグで検索出来たらいいなと思い作ってみました>
+私はよくyoutubeを見るのですが見たい系統のyoutuberを検索してもいつも同じyoutuberが出てくるので、youtuberに系統に合わせてタグ付けをしてタグで検索出来たらいいなと思い作ってみました
 
 ### ターゲットユーザ
-<推しのyoutuberがいる人や、youtuber本人>
+推しのyoutuberがいる人や、youtuber本人
 
 ### 主な利用シーン
-<自分の推しを広めたい時や新しいyoutuberに出会いたいとき>
+自分の推しを広めたい時や新しいyoutuberに出会いたいとき
 
 ## 設計書
-<>
+
 
 ## チャレンジ要素一覧
-<https://docs.google.com/spreadsheets/d/1g7mCiY08Z23VC0Mqccem_JibZileHsWFhjLd3xubq40/edit?usp=sharing>
+https://docs.google.com/spreadsheets/d/1g7mCiY08Z23VC0Mqccem_JibZileHsWFhjLd3xubq40/edit?usp=sharing
 
 ## 開発環境
 - OS：Linux(CentOS)
