@@ -8,8 +8,10 @@
       <ul class="navbar-nav ml-md-auto align-items-center" >
         <% if user_signed_in? %>
           <li>ようこそ、<%= current_user.name %>さん！</li>
+          <li><%= link_to "About", about_path, class:"btn btn-light btn-outline-secondary btn-margin" %></li>
           <li><%= link_to "マイページ", mypage_path, class:"btn btn-light btn-outline-secondary btn-margin" %></li>
           <li><%= link_to "Youtuber一覧", youtubers_path, class:"btn btn-light btn-outline-secondary btn-margin" %></li>
+          <li><%= link_to "新規Youtuber投稿", new_youtuber_path, class:"btn btn-light btn-outline-secondary btn-margin" %></li>
           <li><%= link_to "タグ一覧", tags_path, class:"btn btn-light btn-outline-secondary btn-margin" %></li>
           <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-light btn-outline-secondary btn-margin" %></li>
         <% else %>
