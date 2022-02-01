@@ -9,9 +9,10 @@
     <p><%= @youtuber.name %></p>
     <h4>説明</h4>
     <p><%= @youtuber.introduction %></p>
+    <h4>画像</h4>
+    <%= attachment_image_tag @youtuber, :image, size: '100x100', format: 'jpeg', fallback: "no_image.jpg" %>
     <h4>評価</h4>
     <div id="star-rate-average-<%= @youtuber.id %>"></div>
-    <%= attachment_image_tag @youtuber, :image, size: '100x100', format: 'jpeg', fallback: "no_image.jpg" %>
     <h4>タグ</h4>
     <div class="tag"><% @youtuber.tag_list.each do |tag| %>
       <%= tag %>&nbsp;&nbsp;
